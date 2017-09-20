@@ -10,16 +10,18 @@ fi
 
 emb_file=${PREFIX}_${MAX}_${MIN}.dat.gz
 
-out=`scripts/run_predict_conll05.sh ${TEST_FILE} \
-                ${MODEL_DIR} "--embeddings $emb_file $ADDITIONAL_PARAMS"`
+scripts/run_predict_conll05.sh ${TEST_FILE} \
+                ${MODEL_DIR} "--embeddings $emb_file $ADDITIONAL_PARAMS" | tee out.log
 ret_val=$?
 echo $out
 
 echo $ret_val
 
 if [ $ret_val -eq 0 ]; then
-    val=`grep Overall $out | awk '{print $8}'`
+    val=`grep Overall out.log | awk '{print $8}'`
 
     echo "{overall: $val}" >> /ouptut/metrics.json
 fi
+
+/bin/rm out.log
 
