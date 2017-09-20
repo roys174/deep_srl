@@ -1,9 +1,10 @@
 import random
 
+
 from constants import *
 from dictionary import Dictionary
 import features
-import FileTools
+import gzip
 
 def get_sentences(filepath, use_se_marker=False):
   """ Read tokenized sentences from file """
@@ -61,13 +62,19 @@ def get_embeddings(word, embeddings):
 
 def get_pretrained_embeddings(filepath):
   embeddings = dict()
-  with FileTools.openReadFile(filepath) as f:
-    for line in f:
-      info = line.strip().split()
-      #lines = [line.strip().split() for line in f.readlines()]
-      #embeddings = dict([(line[0], [float(r) for r in line[1:]]) for line in lines])
-      embeddings[info[0]] = [float(r) for r in info[1:]]
-    f.close()
+
+  if filepath.endswith(".gz"):
+    f = gzip.open(filepath, 'rt')
+  else:
+    f = open(filepath)
+
+  for line in f:
+    info = line.strip().split()
+    #lines = [line.strip().split() for line in f.readlines()]
+    #embeddings = dict([(line[0], [float(r) for r in line[1:]]) for line in lines])
+    embeddings[info[0]] = [float(r) for r in info[1:]]
+
+  f.close()
 
   embedding_size = len(embeddings.values()[0])
   print 'Embedding size={}'.format(embedding_size)

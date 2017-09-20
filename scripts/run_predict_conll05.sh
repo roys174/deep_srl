@@ -6,8 +6,6 @@ INPUT_PATH=$PWD/data/srl/conll05.devel.txt
 #GOLD_PATH="${data_pref}.props.gold.txt"
 MODEL_PATH=$PWD/conll05_model
 
-cd ~/code/deep_srl/
-
 if [ "$#" -gt 0 ]; then
 	if [ "$1" == '-h' ]; then
 		echo "Usage $0 <input_path=$INPUT_PATH> <model_path=$MODEL_PATH> <extra args (or -)> <use gpus>"
