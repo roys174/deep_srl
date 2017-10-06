@@ -21,7 +21,7 @@ fi
 emb_file=${PREFIX}_${MIN_THR}_${MAX_THR}.dat.gz
 
 scripts/run_predict_conll05.sh ${TEST_FILE} \
-                ${MODEL_DIR} "--embeddings $emb_file -d $o_dir $ADDITIONAL_PARAMS" | tee out.log
+                ${MODEL_DIR} "--embeddings $emb_file -d $o_dir $ADDITIONAL_PARAMS --ouptput $o_dir/output.dat" | tee out.log
 
 ret_val=$?
 echo $out
