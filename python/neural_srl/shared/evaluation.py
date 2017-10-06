@@ -62,7 +62,7 @@ class SRLEvaluator(TaggerEvaluator):
                use_se_marker=False,
                pred_props_file=None, 
                word_dict=None,
-	       output_dir=join(ROOT_DIR, 'temp/')):
+	       out_dir=join(ROOT_DIR, 'temp/')):
 
     self.data = data
     self.best_accuracy = 0.0
@@ -71,6 +71,7 @@ class SRLEvaluator(TaggerEvaluator):
     self.gold_props_file = gold_props_file
     self.pred_props_file = pred_props_file
     self.use_se_marker = use_se_marker
+    self.output_dir = out_dir
  
     if gold_props_file is None and pred_props_file is None:
       print ('Warning: not using official gold predicates. Not for formal evaluation.')
@@ -89,7 +90,7 @@ class SRLEvaluator(TaggerEvaluator):
       pred = pred[1:slen-1] if self.use_se_marker else pred[:slen]
       self.pred_labels.append(bio_to_se([self.label_dict.idx2str[l] for l in pred]))
 
-    temp_output = join(ROOT_DIR, "temp/srl_pred_%d.tmp" % os.getpid())
+    temp_output = join(self.output_dir, "srl_pred_%d.tmp" % os.getpid())
     print("Printing results to temp file: {}".format(temp_output))
    
     if self.pred_props_file is None: 
