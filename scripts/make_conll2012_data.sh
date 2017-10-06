@@ -1,4 +1,4 @@
-#! /bin/bash
+ #! /bin/bash
 
 SRLPATH="./data/srl"
 ONTONOTES_PATH=$1

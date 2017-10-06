@@ -117,9 +117,14 @@ if __name__ == "__main__":
                       default='',
                       help='(Optional) Path for output predictions.')
 
-  parser.add_argument('--embeddings',
+  parser.add_argument('-e', '--embeddings',
                       type=str,
                       help='(Optional) Path for word embeddings')
+  
+  parser.add_argument('-d', '--out_dir',
+                      type=str,
+		      default=join(ROOT_DIR, "temp/"),
+                      help='Output dir for predicted file')
 
   parser.add_argument('--outputprops',
                       type=str,
@@ -193,7 +198,8 @@ if __name__ == "__main__":
                              gold_props_file,
                              use_se_marker=config.use_se_marker,
                              pred_props_file=pred_props_file,
-                             word_dict=data.word_dict)
+                             word_dict=data.word_dict,
+			     out_dir=args.out_dir)
   else:
     evaluator = PropIdEvaluator(data.get_test_data(test_sentences, batch_size=None),
                                 data.label_dict) 

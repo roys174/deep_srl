@@ -272,10 +272,10 @@ def get_srl_test_data(filepath, config, word_dict, label_dict, lower_case=True, 
     sentences.append((tokens[i],) + tuple(srl_features[i]) + (labels[i],))
 
   #word_embedding = [get_embeddings(w, word_to_embeddings) for w in word_dict.idx2str]
-  word_embedding = [word_to_embeddings[w] for w in word_dict.idx2str]
-  for i in range(10):
-    w = word_dict.idx2str[i]
-    print(w,word_embedding[i][:10])
+  word_embedding = [word_to_embeddings[w] if w in word_to_embeddings else word_to_embeddings[UNKNOWN_TOKEN] for w in word_dict.idx2str]
+  # for i in range(10):
+  #   w = word_dict.idx2str[i]
+  #   print(w,word_embedding[i][:10])
   word_embedding_shape = [len(word_embedding), len(word_embedding[0])]
 
   return (sentences,  [word_embedding, None, None], [word_embedding_shape,] + feature_shapes)
