@@ -77,7 +77,7 @@ class SRLEvaluator(TaggerEvaluator):
       print ('Warning: not using official gold predicates. Not for formal evaluation.')
       ''' Output to mock gold '''
       assert word_dict != None
-      conll_output_path = join(output_dir,'srl_pred_%d.gold.tmp' % os.getpid())
+      conll_output_path = join(self.output_dir,'srl_pred_%d.gold.tmp' % os.getpid())
       print_gold_to_conll(self.data, word_dict, label_dict, conll_output_path)
       self.pred_props_file = conll_output_path
 

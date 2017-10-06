@@ -199,7 +199,7 @@ if __name__ == "__main__":
                              use_se_marker=config.use_se_marker,
                              pred_props_file=pred_props_file,
                              word_dict=data.word_dict,
-			     out_dir=args.out_dir)
+			     args.out_dir)
   else:
     evaluator = PropIdEvaluator(data.get_test_data(test_sentences, batch_size=None),
                                 data.label_dict) 
